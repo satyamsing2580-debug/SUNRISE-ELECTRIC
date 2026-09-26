@@ -1,0 +1,6 @@
+{
+  "name": "Sunrise Electricals - Premium Electrical Store",
+  "description": "High-end electricals e-commerce store offering premium switches, copper wiring, luxury lighting, fans, and smart home appliances with real-time inventory and order tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

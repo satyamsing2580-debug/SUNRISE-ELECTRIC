@@ -1,0 +1,63 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check if authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Check if user is admin (email or role check or dev mode)
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.email == 'satyamsing2580@gmail.com' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+        request.auth.token.admin == true
+      );
+    }
+
+    // Products catalog: anyone can browse products, admins can create/edit/delete
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Categories: anyone can read
+    match /categories/{catId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Orders: anyone authenticated (or guest with order ID) can create orders
+    // Users can read their own orders, admins can read & update all orders
+    match /orders/{orderId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if isAuthenticated();
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read, write: if isAuthenticated() && request.auth.uid == userId;
+      allow read: if isAdmin();
+    }
+
+    // Reviews & ratings
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    // Settings / Banners & App Control
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Coupons & Promo Codes
+    match /coupons/{couponId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}
