@@ -153,9 +153,9 @@ export const ContactModal: React.FC = () => {
             <Clock className="w-3.5 h-3.5 mr-1" />
             Mon-Sat: 9:00 AM - 8:30 PM
           </span>
-          <span className="flex items-center">
-            <MapPin className="w-3.5 h-3.5 mr-1" />
-            Gopalganj
+          <span className="flex items-center text-slate-600 font-bold">
+            <MapPin className="w-3.5 h-3.5 mr-1 text-amber-600" />
+            LAKHAPATIYA MORE, GOPALGANJ
           </span>
         </div>
 

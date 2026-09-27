@@ -35,15 +35,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div
       onClick={() => setSelectedProduct(product)}
-      className="group relative rounded-2xl bg-white border border-slate-200 hover:border-amber-400 p-3.5 flex flex-col justify-between transition-all duration-250 hover:-translate-y-1 hover:shadow-lg cursor-pointer overflow-hidden text-slate-800"
+      className="group relative rounded-2xl bg-white border border-slate-200 hover:border-amber-400 p-3 sm:p-3.5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-lg active:scale-[0.98] select-none touch-manipulation cursor-pointer overflow-hidden text-slate-800 shadow-xs"
     >
       {/* Top Media */}
       <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-50 mb-3.5 border border-slate-100">
         <img
-          src={product.image}
+          src={product.image || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80';
+          }}
         />
 
         {/* Badges */}

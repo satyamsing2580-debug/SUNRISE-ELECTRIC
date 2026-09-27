@@ -163,6 +163,9 @@ export const OrderTracking: React.FC = () => {
                     <span className="text-base font-black font-mono text-slate-900">
                       {activeOrder.orderNumber}
                     </span>
+                    <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full border border-amber-300 uppercase">
+                      {activeOrder.groupId === 'gopalganj-store' ? 'Gopalganj Hub' : activeOrder.groupId || 'Direct Store'}
+                    </span>
                   </div>
                   <p className="text-xs text-slate-500 mt-0.5 flex items-center">
                     <Calendar className="w-3.5 h-3.5 mr-1" />

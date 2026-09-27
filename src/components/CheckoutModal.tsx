@@ -31,6 +31,7 @@ export const CheckoutModal: React.FC = () => {
   const [step, setStep] = useState<'address' | 'payment'>('address');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card' | 'cod'>('upi');
+  const [selectedGroup, setSelectedGroup] = useState<'gopalganj-store' | 'bihar-contractors'>('gopalganj-store');
   const [upiId, setUpiId] = useState('');
   
   const [address, setAddress] = useState<ShippingAddress>({
@@ -73,7 +74,7 @@ export const CheckoutModal: React.FC = () => {
   const handleCompleteOrder = async () => {
     setIsSubmitting(true);
     try {
-      const order = await placeOrder(address, paymentMethod);
+      const order = await placeOrder(address, paymentMethod, selectedGroup);
       setPlacedOrderNumber(order.orderNumber);
     } catch (err: any) {
       alert(err.message || 'Failed to place order.');
@@ -174,6 +175,12 @@ export const CheckoutModal: React.FC = () => {
         {/* Left Form */}
         <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
           
+          {/* Delivery Notice for Gopalganj, Bihar */}
+          <div className="p-3 bg-amber-50 rounded-2xl border border-amber-200 flex items-center space-x-2.5 text-xs text-amber-900 font-bold">
+            <MapPin className="w-4 h-4 text-amber-600 flex-shrink-0" />
+            <span>Delivery Notice: Delivery is exclusively available within Gopalganj, Bihar.</span>
+          </div>
+
           {/* Step Indicator */}
           <div className="flex items-center justify-between text-xs pb-4 border-b border-slate-100">
             <button

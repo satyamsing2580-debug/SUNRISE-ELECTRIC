@@ -24,7 +24,7 @@ import {
 } from '../types';
 import { INITIAL_PRODUCTS, INITIAL_CATEGORIES } from '../data/initialProducts';
 import { useAuth } from './AuthContext';
-import { playOrderNotificationSound } from '../utils/audio';
+import { startContinuousOrderAlarm, stopContinuousOrderAlarm, isAlarmActive, playOrderNotificationSound } from '../utils/audio';
 
 export const INITIAL_COUPONS: Coupon[] = [
   {
@@ -61,14 +61,14 @@ export const INITIAL_COUPONS: Coupon[] = [
 export const DEFAULT_APP_SETTINGS: AppSettings = {
   storeName: 'Sunrise Electricals',
   ownerName: 'Ashish Singh',
-  storeAddress: 'Gopalganj',
+  storeAddress: 'LAKHAPATIYA MORE, GOPALGANJ',
   contactPhone: '+91 7488623614',
   whatsappNumber: '917488623614',
   supportEmail: 'sales@sunriseelectricals.com',
   freeDeliveryThreshold: 1999,
   deliveryFee: 99,
   gstRate: 0.18,
-  announcementText: 'Authorized Electrical Showroom in Gopalganj • Owner: Ashish Singh • Call/WhatsApp: +91 7488623614',
+  announcementText: 'Authorized Electrical Showroom • LAKHAPATIYA MORE, GOPALGANJ • Owner: Ashish Singh • Call/WhatsApp: +91 7488623614',
   isStoreOpen: true
 };
 
@@ -106,16 +106,23 @@ interface StoreContextType {
   // Orders & Realtime Tracking & Sound Notification
   orders: Order[];
   loadingOrders: boolean;
-  placeOrder: (shippingAddress: ShippingAddress, paymentMethod: 'upi' | 'card' | 'cod') => Promise<Order>;
+  orderGroupFilter: string;
+  setOrderGroupFilter: (group: string) => void;
+  orderAdminFilter: string;
+  setOrderAdminFilter: (admin: string) => void;
+  placeOrder: (shippingAddress: ShippingAddress, paymentMethod: 'upi' | 'card' | 'cod', customGroupId?: string) => Promise<Order>;
   updateOrderStatus: (orderId: string, newStatus: OrderStatus, note?: string) => Promise<void>;
   deleteOrder: (orderId: string) => Promise<void>;
   
-  // Sound Alerts
+  // Sound Alerts & Continuous High-Volume Alarm
   soundAlertEnabled: boolean;
   setSoundAlertEnabled: (enabled: boolean) => void;
   testSoundAlert: () => void;
   newOrderAlert: Order | null;
   clearNewOrderAlert: () => void;
+  isOrderAlarmActive: boolean;
+  acknowledgeOrderAlarm: () => void;
+  triggerTestAlarm: () => void;
 
   // Product Full CRUD
   addProduct: (product: Omit<Product, 'id'>) => Promise<string>;
@@ -224,10 +231,24 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Orders & Sound
   const [orders, setOrders] = useState<Order[]>([]);
   const [loadingOrders, setLoadingOrders] = useState<boolean>(true);
+  const [orderGroupFilter, setOrderGroupFilter] = useState<string>('all');
+  const [orderAdminFilter, setOrderAdminFilter] = useState<string>('all');
   const [soundAlertEnabled, setSoundAlertEnabled] = useState<boolean>(true);
   const [newOrderAlert, setNewOrderAlert] = useState<Order | null>(null);
+  const [isOrderAlarmActive, setIsOrderAlarmActive] = useState<boolean>(false);
   const initialOrdersLoadedRef = useRef(false);
   const previousOrdersCountRef = useRef(0);
+
+  const acknowledgeOrderAlarm = () => {
+    stopContinuousOrderAlarm();
+    setIsOrderAlarmActive(false);
+    setNewOrderAlert(null);
+  };
+
+  const triggerTestAlarm = () => {
+    setIsOrderAlarmActive(true);
+    startContinuousOrderAlarm();
+  };
 
   // Save cart & wishlist
   useEffect(() => {
@@ -266,7 +287,16 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             });
             setProducts(Array.from(map.values()));
           } else {
-            setProducts(deduplicateProducts(INITIAL_PRODUCTS));
+            // Auto-seed initial catalog to Firestore so all devices share global real-time catalog
+            const deduplicated = deduplicateProducts(INITIAL_PRODUCTS);
+            setProducts(deduplicated);
+            deduplicated.forEach(async (p) => {
+              try {
+                await setDoc(doc(db, 'products', p.id), p);
+              } catch (e) {
+                console.warn('Product auto-seed notice:', e);
+              }
+            });
           }
           setLoadingProducts(false);
         },
@@ -306,6 +336,13 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             setCategories(Array.from(map.values()));
           } else {
             setCategories(INITIAL_CATEGORIES);
+            INITIAL_CATEGORIES.forEach(async (c) => {
+              try {
+                await setDoc(doc(db, 'categories', c.id), c);
+              } catch (e) {
+                console.warn('Category auto-seed notice:', e);
+              }
+            });
           }
           setLoadingCategories(false);
         },
@@ -428,8 +465,9 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             if (loaded.length > previousOrdersCountRef.current) {
               const newestOrder = loaded[0];
               setNewOrderAlert(newestOrder);
+              setIsOrderAlarmActive(true);
               if (soundAlertEnabled) {
-                playOrderNotificationSound();
+                startContinuousOrderAlarm();
               }
             }
           } else {
@@ -610,17 +648,25 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Order Placement
   const placeOrder = async (
     shippingAddress: ShippingAddress, 
-    paymentMethod: 'upi' | 'card' | 'cod'
+    paymentMethod: 'upi' | 'card' | 'cod',
+    customGroupId?: string
   ): Promise<Order> => {
     if (cart.length === 0) throw new Error('Your cart is empty.');
 
     const orderNumber = `SUN-${Date.now().toString().slice(-6)}-${Math.floor(100 + Math.random() * 900)}`;
     const now = new Date().toISOString();
 
+    // Determine group ID (branch / contractor division) and assign admin
+    const defaultGroup = shippingAddress.city?.toLowerCase().includes('gopalganj')
+      ? 'gopalganj-store'
+      : 'bihar-contractors';
+
     const orderData: Order = {
       id: '',
       orderNumber,
       userId: currentUser?.uid || userProfile?.uid || 'guest-user',
+      groupId: customGroupId || defaultGroup,
+      adminId: 'satyamsing2580@gmail.com',
       customerName: shippingAddress.fullName,
       customerEmail: currentUser?.email || userProfile?.email || 'customer@sunriseelectricals.com',
       customerPhone: shippingAddress.phone,
@@ -651,7 +697,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         {
           status: 'placed',
           title: 'Order Placed by Customer',
-          description: 'Verified customer details and registered order.',
+          description: 'Verified customer details and registered order in Firestore database.',
           timestamp: now,
           location: 'Sunrise Electricals Central Hub'
         }
@@ -711,7 +757,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       title: statusLabels[newStatus].title,
       description: note || statusLabels[newStatus].desc,
       timestamp: new Date().toISOString(),
-      location: 'Sunrise Electricals Hub'
+      location: 'Sunrise Electricals Hub, LAKHAPATIYA MORE, GOPALGANJ'
     };
 
     const updatedTracking = [...(targetOrder.trackingUpdates || []), newUpdate];
@@ -913,6 +959,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         filteredProducts,
         orders,
         loadingOrders,
+        orderGroupFilter,
+        setOrderGroupFilter,
+        orderAdminFilter,
+        setOrderAdminFilter,
         placeOrder,
         updateOrderStatus,
         deleteOrder,
@@ -920,7 +970,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setSoundAlertEnabled,
         testSoundAlert,
         newOrderAlert,
-        clearNewOrderAlert: () => setNewOrderAlert(null),
+        clearNewOrderAlert: acknowledgeOrderAlarm,
+        isOrderAlarmActive,
+        acknowledgeOrderAlarm,
+        triggerTestAlarm,
         addProduct,
         updateProduct,
         deleteProduct,

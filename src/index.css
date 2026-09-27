@@ -44,4 +44,31 @@
   background: #f59e0b;
 }
 
+/* Mobile PWA & Web2App / Median Native App Enhancements */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.safe-area-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 8px);
+}
+
+@keyframes bounceSubtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounceSubtle 2.5s infinite ease-in-out;
+}
+
+
 

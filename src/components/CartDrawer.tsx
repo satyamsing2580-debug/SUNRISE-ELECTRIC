@@ -129,9 +129,12 @@ export const CartDrawer: React.FC = () => {
             cart.map((item, idx) => (
               <div key={`cart-${item.product.id || idx}-${item.selectedColor || ''}-${idx}`} className="py-4 flex gap-3.5 items-start">
                 <img
-                  src={item.product.image}
+                  src={item.product.image || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'}
                   alt={item.product.name}
                   className="w-18 h-18 rounded-xl object-cover bg-slate-50 border border-slate-200 flex-shrink-0"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80';
+                  }}
                 />
                 
                 <div className="flex-1 min-w-0">

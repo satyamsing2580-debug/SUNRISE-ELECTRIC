@@ -104,6 +104,8 @@ export interface Order {
   };
   orderStatus: OrderStatus;
   trackingUpdates: TrackingUpdate[];
+  groupId?: string;
+  adminId?: string;
   notes?: string;
   createdAt: string;
   updatedAt: string;

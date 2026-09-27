@@ -1,0 +1,122 @@
+{
+  "entities": {
+    "Order": {
+      "title": "Order",
+      "description": "Customer order with items, shipping details, status, and group/admin assignment",
+      "type": "object",
+      "properties": {
+        "orderNumber": { "type": "string", "description": "Unique human-readable order number" },
+        "userId": { "type": "string", "description": "ID of the customer who placed the order" },
+        "groupId": { "type": "string", "description": "Branch or contractor group ID (e.g. gopalganj-store)" },
+        "adminId": { "type": "string", "description": "Assigned admin ID or owner email" },
+        "customerName": { "type": "string", "description": "Customer full name" },
+        "customerEmail": { "type": "string", "description": "Customer email address" },
+        "customerPhone": { "type": "string", "description": "Customer contact phone" },
+        "shippingAddress": { "type": "object", "description": "Delivery address" },
+        "items": { "type": "array", "description": "List of ordered products and quantities" },
+        "subtotal": { "type": "number", "description": "Subtotal amount before taxes & discounts" },
+        "taxGst": { "type": "number", "description": "18% GST tax amount" },
+        "shippingFee": { "type": "number", "description": "Shipping fee" },
+        "discountAmount": { "type": "number", "description": "Discount applied from coupons" },
+        "couponCode": { "type": "string", "description": "Coupon code if applied" },
+        "totalAmount": { "type": "number", "description": "Final total order amount" },
+        "paymentMethod": { "type": "string", "description": "Payment method: upi, card, cod" },
+        "paymentStatus": { "type": "string", "description": "pending, completed, failed" },
+        "orderStatus": { "type": "string", "description": "placed, confirmed, dispatched, out_for_delivery, delivered, cancelled" },
+        "trackingUpdates": { "type": "array", "description": "Timeline of status updates" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last update timestamp" }
+      },
+      "required": ["orderNumber", "customerName", "customerPhone", "items", "totalAmount", "orderStatus"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Electrical hardware catalog product item",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Product display name" },
+        "brand": { "type": "string", "description": "Brand manufacturer name" },
+        "category": { "type": "string", "description": "Primary category" },
+        "price": { "type": "number", "description": "Current selling price" },
+        "originalPrice": { "type": "number", "description": "Original MRP before discount" },
+        "inStock": { "type": "boolean", "description": "Availability flag" },
+        "stockCount": { "type": "number", "description": "Available inventory units" },
+        "rating": { "type": "number", "description": "Star rating out of 5" },
+        "image": { "type": "string", "description": "Product image URL" }
+      },
+      "required": ["name", "brand", "category", "price", "stockCount"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product category grouping",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Category display name" },
+        "slug": { "type": "string", "description": "URL friendly category identifier" },
+        "iconName": { "type": "string", "description": "Lucide icon identifier" }
+      },
+      "required": ["name", "slug"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Registered user or admin profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "User identifier" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User full name" },
+        "role": { "type": "string", "enum": ["customer", "admin"], "description": "User authorization role" }
+      },
+      "required": ["uid", "role"]
+    },
+    "Coupon": {
+      "title": "Coupon",
+      "description": "Discount coupon code",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string", "description": "Uppercase promo code" },
+        "discountType": { "type": "string", "enum": ["percentage", "fixed"], "description": "Discount type" },
+        "discountValue": { "type": "number", "description": "Discount value" },
+        "isActive": { "type": "boolean", "description": "Active status" }
+      },
+      "required": ["code", "discountType", "discountValue", "isActive"]
+    },
+    "AppSettings": {
+      "title": "AppSettings",
+      "description": "Store configuration, phone, addresses, and fees",
+      "type": "object",
+      "properties": {
+        "storeName": { "type": "string", "description": "Store display name" },
+        "ownerName": { "type": "string", "description": "Owner name" },
+        "contactPhone": { "type": "string", "description": "Store contact number" },
+        "isStoreOpen": { "type": "boolean", "description": "Store open/close status" }
+      }
+    }
+  },
+  "firestore": {
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Store orders placed by customers, subscribed in real-time by admins"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Product catalog inventory"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Product catalog categories"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and customer accounts"
+    },
+    "/coupons/{couponId}": {
+      "schema": "Coupon",
+      "description": "Promotional discounts and coupons"
+    },
+    "/settings/{settingId}": {
+      "schema": "AppSettings",
+      "description": "Store operating hours, contact numbers, and delivery thresholds"
+    }
+  }
+}

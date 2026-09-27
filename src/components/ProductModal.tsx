@@ -69,9 +69,12 @@ export const ProductModal: React.FC = () => {
           <div className="md:col-span-6 space-y-4">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50 border border-slate-200">
               <img
-                src={images[activeImageIndex] || selectedProduct.image}
+                src={images[activeImageIndex] || selectedProduct.image || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80'}
                 alt={selectedProduct.name}
                 className="w-full h-full object-cover transition-all duration-300"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80';
+                }}
               />
               <button
                 onClick={() => toggleWishlist(selectedProduct.id)}

@@ -14,6 +14,11 @@ import { WishlistPage } from './components/WishlistPage';
 import { AdminLoginModal } from './components/AdminLoginModal';
 import { ContactModal } from './components/ContactModal';
 import { Footer } from './components/Footer';
+import { MobileBottomNav } from './components/MobileBottomNav';
+import { InstallAppPrompt } from './components/InstallAppPrompt';
+import { NetworkStatusIndicator } from './components/NetworkStatusIndicator';
+import { DeliveryNoticeBanner } from './components/DeliveryNoticeBanner';
+import { NewOrderAlarmModal } from './components/NewOrderAlarmModal';
 import { Product } from './types';
 import { 
   ArrowRight, 
@@ -51,25 +56,31 @@ const MainContent: React.FC = () => {
   }, [products]);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col selection:bg-amber-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col selection:bg-amber-500 selection:text-white pb-20 lg:pb-0">
+      {/* Offline/Online Network Status Banner */}
+      <NetworkStatusIndicator />
+
       {/* Clean top Navbar with zero extra headings above */}
       <Navbar />
 
       <main className="flex-1">
         {currentView === 'home' && (
           <div>
+            {/* Front-Page Delivery Notice for Gopalganj, Bihar */}
+            <DeliveryNoticeBanner />
+
             {/* Hero Section */}
             <HeroBanner />
 
             {/* Featured Products Section */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-4">
                 <div>
                   <div className="flex items-center space-x-2 text-amber-700 text-xs font-black uppercase tracking-wider mb-1">
                     <Sparkles className="w-3.5 h-3.5 text-amber-600" />
                     <span>Handpicked Collection</span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-display">
+                  <h2 className="text-xl sm:text-3xl font-black text-slate-900 font-display">
                     Featured Electrical Innovations
                   </h2>
                   <p className="text-xs text-slate-500 mt-1">
@@ -89,7 +100,8 @@ const MainContent: React.FC = () => {
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Mobile-Native 2-column touch grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
                 {featuredProducts.map((prod, idx) => (
                   <ProductCard key={`feat-${prod.id}-${idx}`} product={prod} />
                 ))}
@@ -164,7 +176,7 @@ const MainContent: React.FC = () => {
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
                 {bestSellers.map((prod, idx) => (
                   <ProductCard key={`best-${prod.id}-${idx}`} product={prod} />
                 ))}
@@ -247,9 +259,14 @@ const MainContent: React.FC = () => {
       {/* Global Modals & Drawers */}
       <CartDrawer />
       <ProductModal />
+      <NewOrderAlarmModal />
       <AdminLoginModal />
       <ContactModal />
       <Footer />
+
+      {/* PWA Install Banner & Native Mobile Dock */}
+      <InstallAppPrompt />
+      <MobileBottomNav />
     </div>
   );
 };

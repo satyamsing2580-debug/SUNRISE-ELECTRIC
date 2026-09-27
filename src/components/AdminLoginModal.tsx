@@ -100,14 +100,15 @@ export const AdminLoginModal: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-slate-700 font-bold mb-1">
-              Master Admin Password *
+            <label className="block text-slate-700 font-bold mb-1 flex justify-between items-center">
+              <span>Master Admin Password *</span>
+              <span className="text-[10px] text-amber-600 font-bold bg-amber-50 px-2 py-0.5 rounded border border-amber-200">Passcode: 1616</span>
             </label>
             <div className="relative">
               <input
                 type="password"
                 required
-                placeholder="••••••••"
+                placeholder="Enter 1616"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2.5 pl-9 pr-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:bg-white text-xs font-mono"
