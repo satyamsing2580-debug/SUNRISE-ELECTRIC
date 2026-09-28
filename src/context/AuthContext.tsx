@@ -33,8 +33,8 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const ADMIN_EMAILS = ['satyamsing2580@gmail.com', 'admin@sunriseelectricals.com', 'owner@sunrise.com'];
-const MASTER_ADMIN_PASSWORD = '1616';
-const VALID_ADMIN_PASSWORDS = ['1616', 'Sunrise1616'];
+const MASTER_ADMIN_PASSWORD = 'Sunrise1616';
+const VALID_ADMIN_PASSWORDS = ['Sunrise1616'];
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
@@ -159,7 +159,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  // Custom Super Admin login with password '1616'
+  // Custom Super Admin authentication
   const loginAsAdminWithPassword = async (idOrPhone: string, pass: string): Promise<boolean> => {
     setError(null);
     const cleanPass = pass.trim();
