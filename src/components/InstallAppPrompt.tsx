@@ -74,7 +74,7 @@ export const InstallAppPrompt: React.FC = () => {
   if (isInstalled || !isVisible) return null;
 
   return (
-    <div className="fixed bottom-20 left-3 right-3 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-md z-40 bg-slate-900 text-white p-3.5 rounded-2xl shadow-2xl border border-amber-500/30 backdrop-blur-md animate-in slide-in-from-bottom duration-300">
+    <div className="fixed bottom-20 left-3 right-3 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-md z-40 glass-panel-heavy text-white p-3.5 rounded-2xl shadow-2xl border border-white/20 backdrop-blur-2xl animate-in slide-in-from-bottom duration-300">
       <div className="flex items-center justify-between gap-3">
         {/* App Icon */}
         <div className="flex items-center space-x-3 flex-1 min-w-0">

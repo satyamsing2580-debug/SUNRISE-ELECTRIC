@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import { StoreProvider, useStore } from './context/StoreContext';
 import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
@@ -24,7 +24,10 @@ import {
   ArrowRight, 
   Sparkles, 
   TrendingUp, 
-  Star
+  Star,
+  Zap,
+  ShieldCheck,
+  CheckCircle2
 } from 'lucide-react';
 
 const MainContent: React.FC = () => {
@@ -56,217 +59,256 @@ const MainContent: React.FC = () => {
   }, [products]);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col selection:bg-amber-500 selection:text-white pb-20 lg:pb-0">
-      {/* Offline/Online Network Status Banner */}
-      <NetworkStatusIndicator />
+    <div className="relative min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col selection:bg-amber-500 selection:text-white pb-24 lg:pb-0 overflow-x-hidden">
+      
+      {/* Soft Multi-Colored Neon Gradient Glowing Background Blobs (Frosted Canvas Underlay) */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Blob 1: Vibrant Golden-Amber Orb */}
+        <div className="absolute -top-32 -left-32 w-[580px] h-[580px] bg-gradient-to-br from-amber-500/30 via-orange-500/20 to-yellow-500/10 rounded-full blur-[120px] animate-blob-1" />
+        
+        {/* Blob 2: Neon Cyan / Electric Sky Orb */}
+        <div className="absolute top-[20%] -right-32 w-[620px] h-[620px] bg-gradient-to-bl from-cyan-400/25 via-sky-500/20 to-blue-600/15 rounded-full blur-[130px] animate-blob-2" />
+        
+        {/* Blob 3: Deep Royal Purple / Magenta Orb */}
+        <div className="absolute top-[50%] -left-20 w-[640px] h-[640px] bg-gradient-to-tr from-fuchsia-600/25 via-purple-600/20 to-indigo-700/15 rounded-full blur-[140px] animate-blob-3" />
+        
+        {/* Blob 4: Emerald / Electric Teal Accent Orb */}
+        <div className="absolute -bottom-32 right-[10%] w-[550px] h-[550px] bg-gradient-to-t from-emerald-400/20 via-teal-500/15 to-cyan-600/10 rounded-full blur-[125px] animate-blob-1" />
 
-      {/* Clean top Navbar with zero extra headings above */}
-      <Navbar />
+        {/* Blob 5: Ambient Center Amber/Violet Glow */}
+        <div className="absolute top-[42%] right-[25%] w-[480px] h-[480px] bg-gradient-to-r from-amber-500/15 to-violet-600/15 rounded-full blur-[140px] animate-blob-2" />
+      </div>
 
-      <main className="flex-1">
-        {currentView === 'home' && (
-          <div>
-            {/* Front-Page Delivery Notice for Gopalganj, Bihar */}
-            <DeliveryNoticeBanner />
+      <div className="relative z-10 flex flex-col flex-1">
+        {/* Network Status Banner */}
+        <NetworkStatusIndicator />
 
-            {/* Hero Section */}
-            <HeroBanner />
+        {/* Frosted Glass Navbar */}
+        <Navbar />
 
-            {/* Featured Products Section */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-4">
-                <div>
-                  <div className="flex items-center space-x-2 text-amber-700 text-xs font-black uppercase tracking-wider mb-1">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                    <span>Handpicked Collection</span>
+        <main className="flex-1">
+          {currentView === 'home' && (
+            <div>
+              {/* Delivery Notice Banner */}
+              <DeliveryNoticeBanner />
+
+              {/* Dynamic Glassmorphic Hero Section */}
+              <HeroBanner />
+
+              {/* Featured Products Section */}
+              <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+                  <div>
+                    <div className="flex items-center space-x-2 text-amber-400 text-xs font-black uppercase tracking-wider mb-2">
+                      <Sparkles className="w-4 h-4 text-amber-400" />
+                      <span>Curated Glass Architecture</span>
+                    </div>
+                    <h2 className="text-2xl sm:text-4xl font-black text-white font-display tracking-tight">
+                      Featured Electrical Innovations
+                    </h2>
+                    <p className="text-sm text-slate-300 mt-1">
+                      Touch glass modular switches, flame-retardant wiring, and luxury magnetic fixtures.
+                    </p>
                   </div>
-                  <h2 className="text-xl sm:text-3xl font-black text-slate-900 font-display">
-                    Featured Electrical Innovations
-                  </h2>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Top trending modular switches, fire-retardant wiring, and luxury magnetic fixtures
-                  </p>
+
+                  <button
+                    onClick={() => {
+                      setFilter('category', 'All');
+                      setCurrentView('catalog');
+                    }}
+                    className="glass-btn px-4 py-2.5 rounded-xl text-xs font-bold text-amber-300 hover:text-white flex items-center space-x-2 self-start sm:self-auto transition-all"
+                  >
+                    <span>Explore Full Catalog</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
+                  </button>
                 </div>
 
-                <button
-                  onClick={() => {
-                    setFilter('category', 'All');
-                    setCurrentView('catalog');
-                  }}
-                  className="text-xs font-bold text-amber-700 hover:text-amber-800 flex items-center space-x-1.5 self-start sm:self-auto"
-                >
-                  <span>Explore Full Catalog</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
+                {/* Grid of Frosted Glass Cards */}
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                  {featuredProducts.map((prod, idx) => (
+                    <ProductCard key={`feat-${prod.id}-${idx}`} product={prod} />
+                  ))}
+                </div>
+              </section>
 
-              {/* Mobile-Native 2-column touch grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-                {featuredProducts.map((prod, idx) => (
-                  <ProductCard key={`feat-${prod.id}-${idx}`} product={prod} />
-                ))}
-              </div>
-            </section>
+              {/* Frosted Glass BLDC Feature Spotlight */}
+              <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div className="relative rounded-3xl overflow-hidden glass-panel p-8 sm:p-12 border border-white/20 shadow-2xl">
+                  {/* Subtle ambient internal glow */}
+                  <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
 
-            {/* Premium BLDC Feature Spotlight */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-amber-50 via-white to-amber-100/60 border border-amber-200/80 p-8 sm:p-12 shadow-sm">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                  <div className="lg:col-span-8 space-y-4">
-                    <span className="text-xs font-black text-amber-800 uppercase tracking-widest bg-amber-100 px-3 py-1 rounded-full border border-amber-300">
-                      BLDC Power Revolution
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                    <div className="lg:col-span-8 space-y-4">
+                      <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full glass-panel-subtle border border-amber-400/30 text-amber-300 text-xs font-black uppercase tracking-wider">
+                        <Zap className="w-3.5 h-3.5 text-amber-400" />
+                        <span>BLDC Energy Revolution</span>
+                      </div>
+                      
+                      <h3 className="text-2xl sm:text-4xl font-black text-white font-display leading-tight">
+                        Save Up to 65% on Electricity with Smart 28W BLDC Fans
+                      </h3>
+                      
+                      <p className="text-sm text-slate-300 leading-relaxed max-w-xl">
+                        Upgrade standard 75W ceiling fans to brushless direct-current technology. 
+                        Atomberg & Crompton BLDC models run 3x longer on home inverters, deliver 
+                        whisper-quiet 52dB aerodynamics, and come with a 3-year warranty.
+                      </p>
+
+                      <div className="pt-2 flex flex-wrap gap-4 items-center">
+                        <button
+                          onClick={() => {
+                            setFilter('category', 'BLDC Smart Fans & Ventilation');
+                            setCurrentView('catalog');
+                          }}
+                          className="glass-btn-primary px-6 py-3.5 rounded-xl text-white font-black text-xs uppercase tracking-wider flex items-center space-x-2 transition-all active:scale-95"
+                        >
+                          <span>View BLDC Fans Range</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </button>
+                        
+                        <div className="flex items-center space-x-2 text-xs font-semibold text-slate-300">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                          <span>Runs on Solar & Inverters</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="lg:col-span-4 flex justify-center">
+                      <div className="relative rounded-2xl overflow-hidden aspect-square w-64 glass-panel border border-white/20 shadow-2xl group">
+                        <img
+                          src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"
+                          alt="BLDC Smart Fan"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                        <div className="absolute bottom-3 left-3 right-3 text-center">
+                          <span className="text-[11px] font-bold text-amber-300 uppercase tracking-widest">
+                            28 Watt High-Torque BLDC
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Best Sellers Section */}
+              <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <div className="flex items-center space-x-2 text-amber-400 text-xs font-black uppercase tracking-wider mb-1">
+                      <TrendingUp className="w-4 h-4" />
+                      <span>Contractor Favorites</span>
+                    </div>
+                    <h2 className="text-2xl sm:text-4xl font-black text-white font-display">
+                      Best-Selling Electrical Hardware
+                    </h2>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setFilter('category', 'All');
+                      setCurrentView('catalog');
+                    }}
+                    className="glass-btn px-4 py-2 rounded-xl text-xs font-bold text-amber-300 hover:text-white flex items-center space-x-1"
+                  >
+                    <span>See More</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                  {bestSellers.map((prod, idx) => (
+                    <ProductCard key={`best-${prod.id}-${idx}`} product={prod} />
+                  ))}
+                </div>
+              </section>
+
+              {/* Testimonials from Contractors & Homeowners in Frosted Glass */}
+              <section className="relative py-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="text-center max-w-xl mx-auto mb-12 space-y-2">
+                    <span className="text-xs font-black uppercase tracking-wider text-amber-400">
+                      Authentic Electrical Showroom • Gopalganj
                     </span>
-                    <h3 className="text-2xl sm:text-4xl font-black text-slate-900 font-display">
-                      Save Up to 65% on Electricity with Smart 28W BLDC Fans
-                    </h3>
-                    <p className="text-sm text-slate-600 leading-relaxed max-w-xl">
-                      Upgrade standard 75W ceiling fans to brushless direct-current technology. 
-                      Atomberg & Crompton BLDC models run 3x longer on home inverters, deliver 
-                      whisper-quiet 52dB aerodynamics, and come with a 3-year warranty.
+                    <h2 className="text-2xl sm:text-4xl font-black text-white font-display">
+                      What Contractors & Builders Say
+                    </h2>
+                    <p className="text-xs text-slate-300">
+                      From luxury residences to commercial high-rises.
                     </p>
-                    <div className="pt-2">
-                      <button
-                        onClick={() => {
-                          setFilter('category', 'BLDC Smart Fans & Ventilation');
-                          setCurrentView('catalog');
-                        }}
-                        className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs uppercase tracking-wider flex items-center space-x-2 transition-all shadow-md shadow-amber-500/20"
-                      >
-                        <span>View BLDC Fans Range</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </button>
-                    </div>
                   </div>
 
-                  <div className="lg:col-span-4 flex justify-center">
-                    <div className="relative rounded-2xl overflow-hidden aspect-square w-64 border border-slate-200 shadow-xl bg-white">
-                      <img
-                        src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"
-                        alt="BLDC Smart Fan"
-                        className="w-full h-full object-cover"
-                      />
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="p-6 rounded-2xl glass-card space-y-4">
+                      <div className="flex items-center space-x-1 text-amber-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-xs text-slate-200 italic leading-relaxed">
+                        "Sunrise Electricals supplied authentic Legrand Arteor plates and Polycab FR wires for our 4-villa project. All coils came with batch test reports and GST billing. Prompt next-day delivery."
+                      </p>
+                      <div className="pt-3 border-t border-white/20">
+                        <p className="font-bold text-white text-xs">Ar. Vikram Mehra</p>
+                        <p className="text-[10px] text-slate-400">Principal Architect, Mehra Design Studio</p>
+                      </div>
+                    </div>
+
+                    <div className="p-6 rounded-2xl glass-card space-y-4">
+                      <div className="flex items-center space-x-1 text-amber-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-xs text-slate-200 italic leading-relaxed">
+                        "Their real-time order tracking and warehouse stock accuracy is unmatched in the electrical sector. Never had a counterfeit switch or broken crystal fixture."
+                      </p>
+                      <div className="pt-3 border-t border-white/20">
+                        <p className="font-bold text-white text-xs">Rajeev K. Sharma</p>
+                        <p className="text-[10px] text-slate-400">Senior Electrical Contractor, Sector 150</p>
+                      </div>
+                    </div>
+
+                    <div className="p-6 rounded-2xl glass-card space-y-4">
+                      <div className="flex items-center space-x-1 text-amber-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-xs text-slate-200 italic leading-relaxed">
+                        "The magnetic track lighting system by Philips is phenomenal. Sunrise's engineering team helped calculate the lumen requirements and driver wattage accurately."
+                      </p>
+                      <div className="pt-3 border-t border-white/20">
+                        <p className="font-bold text-white text-xs">Pooja Singhania</p>
+                        <p className="text-[10px] text-slate-400">Interior Stylist & Homeowner</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
+              </section>
+            </div>
+          )}
 
-            {/* Best Sellers Section */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <div className="flex items-center space-x-2 text-amber-700 text-xs font-black uppercase tracking-wider mb-1">
-                    <TrendingUp className="w-3.5 h-3.5" />
-                    <span>Contractor Favorites</span>
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-display">
-                    Best-Selling Electrical Hardware
-                  </h2>
-                </div>
+          {currentView === 'catalog' && <ProductCatalog />}
+          {currentView === 'orders' && <OrderTracking />}
+          {currentView === 'admin' && <AdminDashboard />}
+          {currentView === 'wishlist' && <WishlistPage />}
+          {currentView === 'checkout' && <CheckoutModal />}
+        </main>
 
-                <button
-                  onClick={() => {
-                    setFilter('category', 'All');
-                    setCurrentView('catalog');
-                  }}
-                  className="text-xs font-bold text-amber-700 hover:text-amber-800 flex items-center space-x-1"
-                >
-                  <span>See More</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
+        {/* Global Modals & Drawers */}
+        <CartDrawer />
+        <ProductModal />
+        <NewOrderAlarmModal />
+        <AdminLoginModal />
+        <ContactModal />
+        <Footer />
 
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-                {bestSellers.map((prod, idx) => (
-                  <ProductCard key={`best-${prod.id}-${idx}`} product={prod} />
-                ))}
-              </div>
-            </section>
-
-            {/* Testimonials from Contractors & Homeowners */}
-            <section className="bg-white border-t border-b border-slate-200 py-16">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center max-w-xl mx-auto mb-12 space-y-2">
-                  <span className="text-xs font-black uppercase tracking-wider text-amber-700">
-                    Authentic Electrical Showroom • Gopalganj
-                  </span>
-                  <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-display">
-                    What Contractors & Builders Say
-                  </h2>
-                  <p className="text-xs text-slate-500">
-                    From luxury residences to commercial high-rises.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
-                    <div className="flex items-center space-x-1 text-amber-500">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-amber-500" />
-                      ))}
-                    </div>
-                    <p className="text-xs text-slate-700 italic leading-relaxed">
-                      "Sunrise Electricals supplied authentic Legrand Arteor plates and Polycab FR wires for our 4-villa project. All coils came with batch test reports and GST billing. Prompt next-day delivery."
-                    </p>
-                    <div className="pt-2 border-t border-slate-200">
-                      <p className="font-bold text-slate-900 text-xs">Ar. Vikram Mehra</p>
-                      <p className="text-[10px] text-slate-500">Principal Architect, Mehra Design Studio</p>
-                    </div>
-                  </div>
-
-                  <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
-                    <div className="flex items-center space-x-1 text-amber-500">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-amber-500" />
-                      ))}
-                    </div>
-                    <p className="text-xs text-slate-700 italic leading-relaxed">
-                      "Their real-time order tracking and warehouse stock accuracy is unmatched in the electrical sector. Never had a counterfeit switch or broken crystal fixture."
-                    </p>
-                    <div className="pt-2 border-t border-slate-200">
-                      <p className="font-bold text-slate-900 text-xs">Rajeev K. Sharma</p>
-                      <p className="text-[10px] text-slate-500">Senior Electrical Contractor, Sector 150</p>
-                    </div>
-                  </div>
-
-                  <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
-                    <div className="flex items-center space-x-1 text-amber-500">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-amber-500" />
-                      ))}
-                    </div>
-                    <p className="text-xs text-slate-700 italic leading-relaxed">
-                      "The magnetic track lighting system by Philips is phenomenal. Sunrise's engineering team helped calculate the lumen requirements and driver wattage accurately."
-                    </p>
-                    <div className="pt-2 border-t border-slate-200">
-                      <p className="font-bold text-slate-900 text-xs">Pooja Singhania</p>
-                      <p className="text-[10px] text-slate-500">Interior Stylist & Homeowner</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        )}
-
-        {currentView === 'catalog' && <ProductCatalog />}
-        {currentView === 'orders' && <OrderTracking />}
-        {currentView === 'admin' && <AdminDashboard />}
-        {currentView === 'wishlist' && <WishlistPage />}
-        {currentView === 'checkout' && <CheckoutModal />}
-      </main>
-
-      {/* Global Modals & Drawers */}
-      <CartDrawer />
-      <ProductModal />
-      <NewOrderAlarmModal />
-      <AdminLoginModal />
-      <ContactModal />
-      <Footer />
-
-      {/* PWA Install Banner & Native Mobile Dock */}
-      <InstallAppPrompt />
-      <MobileBottomNav />
+        {/* PWA Install Banner & Native Floating Mobile Dock */}
+        <InstallAppPrompt />
+        <MobileBottomNav />
+      </div>
     </div>
   );
 };

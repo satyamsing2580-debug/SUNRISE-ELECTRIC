@@ -48,18 +48,18 @@ export const OrderTracking: React.FC = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 text-slate-800">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 text-slate-100">
       
       {/* Header & Search */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/20">
         <div>
           <div className="flex items-center space-x-2">
-            <Package className="w-6 h-6 text-amber-600" />
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 font-display">
+            <Package className="w-6 h-6 text-amber-400" />
+            <h1 className="text-2xl sm:text-3xl font-black text-white font-display">
               Live Order Tracking
             </h1>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-slate-400 mt-1">
             Real-time status updates synced with Firestore • Instant GST invoices & courier tracking.
           </p>
         </div>
@@ -71,7 +71,7 @@ export const OrderTracking: React.FC = () => {
             placeholder="Search Order Number (e.g. SUN-123456)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-slate-300 rounded-xl py-2 pl-9 pr-4 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 shadow-sm"
+            className="w-full glass-input rounded-xl py-2 pl-9 pr-4 text-xs text-white placeholder-slate-400"
           />
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" />
         </div>
@@ -79,21 +79,21 @@ export const OrderTracking: React.FC = () => {
 
       {loadingOrders ? (
         <div className="py-20 text-center space-y-3">
-          <div className="w-8 h-8 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xs text-slate-500">Checking Firestore for orders...</p>
+          <div className="w-8 h-8 border-2 border-amber-400 border-t-transparent rounded-full animate-spin mx-auto shadow-md" />
+          <p className="text-xs text-slate-400">Checking Firestore for orders...</p>
         </div>
       ) : displayedOrders.length === 0 ? (
-        <div className="p-12 text-center rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
-          <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400">
+        <div className="p-12 text-center rounded-3xl glass-panel border border-white/20 shadow-xl space-y-4">
+          <div className="w-16 h-16 rounded-full glass-panel-subtle flex items-center justify-center mx-auto text-slate-400">
             <Package className="w-8 h-8" />
           </div>
-          <h3 className="text-lg font-bold text-slate-900">No orders found</h3>
-          <p className="text-xs text-slate-500 max-w-sm mx-auto">
+          <h3 className="text-lg font-bold text-white font-display">No orders found</h3>
+          <p className="text-xs text-slate-400 max-w-sm mx-auto">
             You haven't placed an order yet, or no orders matched your search criteria.
           </p>
           <button
             onClick={() => setCurrentView('catalog')}
-            className="px-5 py-2.5 bg-amber-500 text-white font-bold text-xs rounded-xl hover:bg-amber-600 transition-colors shadow-sm"
+            className="px-5 py-2.5 glass-btn-primary text-white font-bold text-xs rounded-xl shadow-lg"
           >
             Browse Products & Place Order
           </button>
@@ -103,7 +103,7 @@ export const OrderTracking: React.FC = () => {
           
           {/* Left Column: Orders List */}
           <div className="lg:col-span-4 space-y-3">
-            <span className="text-xs font-black uppercase tracking-wider text-slate-500">
+            <span className="text-xs font-black uppercase tracking-wider text-slate-400">
               Orders History ({displayedOrders.length})
             </span>
 
@@ -116,32 +116,32 @@ export const OrderTracking: React.FC = () => {
                     onClick={() => setSelectedOrderId(ord.id)}
                     className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                       isSelected
-                        ? 'bg-amber-50/70 border-amber-400 shadow-sm ring-1 ring-amber-400'
-                        : 'bg-white border-slate-200 hover:border-slate-300'
+                        ? 'bg-amber-500/20 border-amber-400 shadow-xl ring-1 ring-amber-400'
+                        : 'glass-card border-white/20'
                     }`}
                   >
                     <div className="flex items-center justify-between text-xs mb-1.5">
-                      <span className="font-mono font-bold text-slate-900">
+                      <span className="font-mono font-bold text-white">
                         {ord.orderNumber}
                       </span>
                       <span className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full ${
                         ord.orderStatus === 'delivered'
-                          ? 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30'
                           : ord.orderStatus === 'cancelled'
-                          ? 'bg-rose-100 text-rose-800'
-                          : 'bg-amber-100 text-amber-800'
+                          ? 'bg-rose-500/20 text-rose-300 border border-rose-400/30'
+                          : 'bg-amber-500/20 text-amber-300 border border-amber-400/30'
                       }`}>
                         {ord.orderStatus.replace('_', ' ')}
                       </span>
                     </div>
 
-                    <p className="text-xs font-semibold text-slate-700 truncate">
+                    <p className="text-xs font-semibold text-slate-300 truncate">
                       {ord.items.map((i) => i.name).join(', ')}
                     </p>
 
-                    <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-100 text-[11px] text-slate-500">
+                    <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/20 text-[11px] text-slate-400">
                       <span>{new Date(ord.createdAt).toLocaleDateString()}</span>
-                      <span className="font-black text-slate-900">
+                      <span className="font-black text-amber-400">
                         ₹{ord.totalAmount.toLocaleString('en-IN')}
                       </span>
                     </div>
@@ -153,21 +153,21 @@ export const OrderTracking: React.FC = () => {
 
           {/* Right Column: Active Order Details & Timeline */}
           {activeOrder && (
-            <div className="lg:col-span-8 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+            <div className="lg:col-span-8 glass-panel border border-white/20 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
               
               {/* Summary */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-200 gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-white/20 gap-4">
                 <div>
                   <div className="flex items-center space-x-2">
-                    <span className="text-xs text-slate-500">Order ID:</span>
-                    <span className="text-base font-black font-mono text-slate-900">
+                    <span className="text-xs text-slate-400">Order ID:</span>
+                    <span className="text-base font-black font-mono text-white">
                       {activeOrder.orderNumber}
                     </span>
-                    <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full border border-amber-300 uppercase">
+                    <span className="text-[10px] font-bold glass-panel-subtle text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/30 uppercase">
                       {activeOrder.groupId === 'gopalganj-store' ? 'Gopalganj Hub' : activeOrder.groupId || 'Direct Store'}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 mt-0.5 flex items-center">
+                  <p className="text-xs text-slate-400 mt-0.5 flex items-center">
                     <Calendar className="w-3.5 h-3.5 mr-1" />
                     Placed on {new Date(activeOrder.createdAt).toLocaleString()}
                   </p>
@@ -177,16 +177,16 @@ export const OrderTracking: React.FC = () => {
                   onClick={() => {
                     alert(`Sunrise Electricals Tax Receipt\nOrder: ${activeOrder.orderNumber}\nCustomer: ${activeOrder.customerName}\nAmount: ₹${activeOrder.totalAmount}\nGST 18% included (₹${activeOrder.taxGst})\nGSTIN: 07AAACS9821P1ZT`);
                   }}
-                  className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold flex items-center space-x-1.5 transition-colors border border-slate-200"
+                  className="px-3.5 py-2 glass-btn text-white rounded-xl text-xs font-bold flex items-center space-x-1.5 transition-colors border border-white/15"
                 >
-                  <Download className="w-3.5 h-3.5 text-amber-600" />
+                  <Download className="w-3.5 h-3.5 text-amber-400" />
                   <span>Download GST Bill</span>
                 </button>
               </div>
 
               {/* Progress Tracker */}
               <div>
-                <h3 className="text-xs font-black uppercase tracking-wider text-slate-500 mb-6">
+                <h3 className="text-xs font-black uppercase tracking-wider text-slate-400 mb-6">
                   Live Dispatch & Delivery Timeline
                 </h3>
 
@@ -203,19 +203,19 @@ export const OrderTracking: React.FC = () => {
                             className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                               isCompleted
                                 ? isCurrent
-                                  ? 'bg-amber-500 text-white ring-4 ring-amber-200 shadow-md'
-                                  : 'bg-emerald-600 text-white'
-                                : 'bg-slate-100 text-slate-400'
+                                  ? 'bg-amber-500 text-slate-950 ring-4 ring-amber-400/40 shadow-lg'
+                                  : 'bg-emerald-500 text-white'
+                                : 'glass-panel-subtle text-slate-500'
                             }`}
                           >
                             {isCompleted ? <CheckCircle2 className="w-4 h-4" /> : index + 1}
                           </div>
                         </div>
                         <div>
-                          <p className={`text-xs font-bold ${isCompleted ? 'text-slate-900' : 'text-slate-400'}`}>
+                          <p className={`text-xs font-bold ${isCompleted ? 'text-white' : 'text-slate-500'}`}>
                             {st.label}
                           </p>
-                          <p className="text-[10px] text-slate-500 hidden sm:block">
+                          <p className="text-[10px] text-slate-400 hidden sm:block">
                             {st.desc}
                           </p>
                         </div>
@@ -227,20 +227,20 @@ export const OrderTracking: React.FC = () => {
 
               {/* Transit Log */}
               {activeOrder.trackingUpdates && activeOrder.trackingUpdates.length > 0 && (
-                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                  <h4 className="text-xs font-black uppercase tracking-wider text-amber-800 flex items-center">
-                    <Clock className="w-3.5 h-3.5 mr-1.5 text-amber-600" />
+                <div className="p-4 rounded-2xl glass-panel-subtle border border-white/10 space-y-3">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-amber-300 flex items-center">
+                    <Clock className="w-3.5 h-3.5 mr-1.5 text-amber-400" />
                     Real-time Transit Log
                   </h4>
-                  <div className="space-y-2 divide-y divide-slate-200">
+                  <div className="space-y-2 divide-y divide-white/10">
                     {activeOrder.trackingUpdates.map((upd, i) => (
                       <div key={i} className="pt-2 first:pt-0 flex items-start justify-between text-xs">
                         <div>
-                          <p className="font-bold text-slate-900">{upd.title}</p>
-                          <p className="text-[11px] text-slate-500">{upd.description}</p>
+                          <p className="font-bold text-white">{upd.title}</p>
+                          <p className="text-[11px] text-slate-400">{upd.description}</p>
                           {upd.location && (
                             <span className="text-[10px] text-slate-400 flex items-center mt-0.5">
-                              <MapPin className="w-3 h-3 mr-1 text-slate-400" />
+                              <MapPin className="w-3 h-3 mr-1 text-amber-400" />
                               {upd.location}
                             </span>
                           )}
@@ -254,23 +254,17 @@ export const OrderTracking: React.FC = () => {
                 </div>
               )}
 
-              {/* Items & Address */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-200">
+              {/* Items & Address in Frosted Glass */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-white/10">
                 <div className="space-y-3">
-                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-500">
-                    Ordered Items ({activeOrder.items.length})
+                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-400">
+                    Items in Shipment
                   </h4>
-                  <div className="space-y-2">
+                  <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
                     {activeOrder.items.map((it, idx) => (
-                      <div key={idx} className="flex items-center space-x-3 text-xs bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                        <img src={it.image} alt={it.name} className="w-10 h-10 rounded-lg object-cover bg-white" />
-                        <div className="flex-1 min-w-0">
-                          <p className="font-bold text-slate-900 truncate">{it.name}</p>
-                          <p className="text-[10px] text-slate-500">
-                            {it.brand} • Qty: {it.quantity}
-                          </p>
-                        </div>
-                        <span className="font-black text-slate-900">
+                      <div key={idx} className="flex justify-between items-center text-xs p-2 rounded-xl glass-panel-subtle border border-white/5">
+                        <span className="truncate pr-2 font-medium text-white">{it.name} × {it.quantity}</span>
+                        <span className="font-bold text-amber-400 flex-shrink-0">
                           ₹{(it.price * it.quantity).toLocaleString('en-IN')}
                         </span>
                       </div>
@@ -279,28 +273,18 @@ export const OrderTracking: React.FC = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-500">
-                    Delivery Address
+                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-400">
+                    Delivery Destination & Receiver
                   </h4>
-                  <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs space-y-2">
-                    <div>
-                      <p className="text-slate-400 text-[10px]">Recipient</p>
-                      <p className="text-slate-900 font-bold">{activeOrder.shippingAddress.fullName}</p>
-                      <p className="text-slate-600 text-[11px]">Phone: {activeOrder.shippingAddress.phone}</p>
-                    </div>
-                    <div>
-                      <p className="text-slate-400 text-[10px]">Site Address</p>
-                      <p className="text-slate-700 text-[11px] leading-relaxed">
-                        {activeOrder.shippingAddress.addressLine1}, {activeOrder.shippingAddress.city}, {activeOrder.shippingAddress.state} - {activeOrder.shippingAddress.pincode}
-                      </p>
-                    </div>
-                    <div className="pt-2 border-t border-slate-200 flex justify-between">
-                      <span className="text-slate-500">Payment:</span>
-                      <span className="text-amber-700 font-black uppercase">{activeOrder.paymentMethod} ({activeOrder.paymentStatus})</span>
-                    </div>
+                  <div className="p-3.5 rounded-2xl glass-panel-subtle border border-white/10 space-y-1.5 text-xs text-slate-300">
+                    <p className="font-bold text-white">{activeOrder.shippingAddress?.fullName || activeOrder.customerName}</p>
+                    <p>{activeOrder.shippingAddress?.addressLine1}</p>
+                    <p>{activeOrder.shippingAddress?.city}, {activeOrder.shippingAddress?.state} - {activeOrder.shippingAddress?.pincode}</p>
+                    <p className="text-slate-400 font-mono text-[11px] pt-1">
+                      Phone: {activeOrder.customerPhone}
+                    </p>
                   </div>
                 </div>
-
               </div>
 
             </div>

@@ -50,15 +50,15 @@ export const ProductModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-xl animate-in fade-in duration-200">
       <div 
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white border border-slate-200 rounded-3xl shadow-2xl text-slate-800 p-6 sm:p-8"
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-panel-heavy border border-white/20 rounded-3xl shadow-2xl text-slate-100 p-6 sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={() => setSelectedProduct(null)}
-          className="absolute top-5 right-5 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors z-20"
+          className="absolute top-5 right-5 p-2 rounded-full glass-btn text-slate-400 hover:text-white transition-colors z-20"
         >
           <X className="w-5 h-5" />
         </button>
@@ -67,7 +67,7 @@ export const ProductModal: React.FC = () => {
           
           {/* Left Media */}
           <div className="md:col-span-6 space-y-4">
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50 border border-slate-200">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-950/50 border border-white/20 shadow-xl">
               <img
                 src={images[activeImageIndex] || selectedProduct.image || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80'}
                 alt={selectedProduct.name}
@@ -78,9 +78,9 @@ export const ProductModal: React.FC = () => {
               />
               <button
                 onClick={() => toggleWishlist(selectedProduct.id)}
-                className="absolute top-3 right-3 p-2.5 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 text-slate-500 hover:text-rose-500 transition-colors shadow-sm"
+                className="absolute top-3 right-3 p-2.5 rounded-full glass-panel-heavy border border-white/20 text-slate-300 hover:text-rose-400 transition-colors shadow-lg"
               >
-                <Heart className={`w-5 h-5 ${isFavorited ? 'text-rose-500 fill-rose-500' : ''}`} />
+                <Heart className={`w-5 h-5 ${isFavorited ? 'text-rose-400 fill-rose-400' : ''}`} />
               </button>
             </div>
 
@@ -92,8 +92,8 @@ export const ProductModal: React.FC = () => {
                     onClick={() => setActiveImageIndex(idx)}
                     className={`w-16 h-16 rounded-xl overflow-hidden border-2 flex-shrink-0 transition-all ${
                       activeImageIndex === idx 
-                        ? 'border-amber-500 scale-95 shadow-md' 
-                        : 'border-slate-200 hover:border-slate-400'
+                        ? 'border-amber-400 scale-95 shadow-md shadow-amber-400/30' 
+                        : 'border-white/10 hover:border-white/30'
                     }`}
                   >
                     <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
@@ -102,22 +102,22 @@ export const ProductModal: React.FC = () => {
               </div>
             )}
 
-            {/* Trust Assurances */}
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 grid grid-cols-3 gap-2 text-center text-xs">
+            {/* Trust Assurances in Frosted Glass */}
+            <div className="p-4 rounded-2xl glass-panel-subtle border border-white/10 grid grid-cols-3 gap-2 text-center text-xs">
               <div className="space-y-1">
-                <ShieldCheck className="w-5 h-5 text-amber-600 mx-auto" />
-                <p className="font-bold text-slate-900">100% Genuine</p>
-                <p className="text-[10px] text-slate-500">Official Brand Seal</p>
+                <ShieldCheck className="w-5 h-5 text-amber-400 mx-auto" />
+                <p className="font-bold text-white">100% Genuine</p>
+                <p className="text-[10px] text-slate-400">Official Brand Seal</p>
               </div>
               <div className="space-y-1">
-                <Truck className="w-5 h-5 text-amber-600 mx-auto" />
-                <p className="font-bold text-slate-900">Express Delivery</p>
-                <p className="text-[10px] text-slate-500">Carefully Packed</p>
+                <Truck className="w-5 h-5 text-amber-400 mx-auto" />
+                <p className="font-bold text-white">Express Delivery</p>
+                <p className="text-[10px] text-slate-400">Carefully Packed</p>
               </div>
               <div className="space-y-1">
-                <RotateCcw className="w-5 h-5 text-amber-600 mx-auto" />
-                <p className="font-bold text-slate-900">7 Days Return</p>
-                <p className="text-[10px] text-slate-500">Hassle Free</p>
+                <RotateCcw className="w-5 h-5 text-amber-400 mx-auto" />
+                <p className="font-bold text-white">7 Days Return</p>
+                <p className="text-[10px] text-slate-400">Hassle Free</p>
               </div>
             </div>
           </div>
@@ -125,42 +125,42 @@ export const ProductModal: React.FC = () => {
           {/* Right Content */}
           <div className="md:col-span-6 space-y-5">
             <div>
-              <div className="flex items-center space-x-2 text-xs font-black uppercase tracking-wider text-amber-700 mb-1">
+              <div className="flex items-center space-x-2 text-xs font-black uppercase tracking-wider text-amber-400 mb-1">
                 <span>{selectedProduct.brand}</span>
                 <span>•</span>
-                <span className="text-slate-500">{selectedProduct.category}</span>
+                <span className="text-slate-400">{selectedProduct.category}</span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display leading-snug">
+              <h2 className="text-xl sm:text-2xl font-black text-white font-display leading-snug">
                 {selectedProduct.name}
               </h2>
             </div>
 
             <div className="flex flex-wrap items-center gap-3 text-xs">
-              <div className="flex items-center space-x-1 bg-amber-50 px-2 py-1 rounded-md border border-amber-200 text-amber-800 font-bold">
-                <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+              <div className="flex items-center space-x-1 glass-panel-subtle px-2.5 py-1 rounded-md border border-white/10 text-amber-300 font-bold">
+                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                 <span>{selectedProduct.rating} / 5.0</span>
               </div>
-              <span className="text-slate-500">
+              <span className="text-slate-400">
                 ({selectedProduct.reviewCount} customer ratings)
               </span>
               <div className="ml-auto">
                 {selectedProduct.inStock ? (
-                  <span className="inline-flex items-center text-emerald-800 font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-                    <CheckCircle2 className="w-3.5 h-3.5 mr-1" />
+                  <span className="inline-flex items-center text-emerald-300 font-bold glass-panel-subtle px-2.5 py-1 rounded-full border border-emerald-400/30">
+                    <CheckCircle2 className="w-3.5 h-3.5 mr-1 text-emerald-400" />
                     In Stock ({selectedProduct.stockCount} units)
                   </span>
                 ) : (
-                  <span className="text-rose-800 font-bold bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">
+                  <span className="text-rose-300 font-bold glass-panel-subtle px-2.5 py-1 rounded-full border border-rose-400/30">
                     Out of Stock
                   </span>
                 )}
               </div>
             </div>
 
-            {/* Price section */}
-            <div className="p-4 rounded-2xl bg-amber-50/50 border border-amber-200/80 space-y-1">
+            {/* Price section in Frosted Glass */}
+            <div className="p-4 rounded-2xl glass-panel border border-white/15 space-y-1">
               <div className="flex items-baseline space-x-3">
-                <span className="text-3xl font-black text-slate-900">
+                <span className="text-3xl font-black text-white">
                   ₹{selectedProduct.price.toLocaleString('en-IN')}
                 </span>
                 {selectedProduct.originalPrice > selectedProduct.price && (
@@ -168,29 +168,29 @@ export const ProductModal: React.FC = () => {
                     <span className="text-sm text-slate-400 line-through">
                       ₹{selectedProduct.originalPrice.toLocaleString('en-IN')}
                     </span>
-                    <span className="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200">
+                    <span className="text-xs font-bold text-emerald-300 glass-panel-subtle px-2 py-0.5 rounded border border-emerald-400/30">
                       Save {selectedProduct.discountPercent}% (₹{(selectedProduct.originalPrice - selectedProduct.price).toLocaleString('en-IN')})
                     </span>
                   </>
                 )}
               </div>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-400">
                 Price includes 18% Electrical GST • Free standard delivery on orders above ₹1,999
               </p>
             </div>
 
-            <p className="text-sm text-slate-600 leading-relaxed">
+            <p className="text-sm text-slate-300 leading-relaxed">
               {selectedProduct.description}
             </p>
 
             {/* Highlights */}
             {selectedProduct.features && selectedProduct.features.length > 0 && (
               <div className="space-y-1.5">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">Key Highlights</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Key Highlights</h4>
                 <div className="space-y-1">
                   {selectedProduct.features.map((feat, i) => (
-                    <div key={i} className="flex items-start text-xs text-slate-700">
-                      <Zap className="w-3.5 h-3.5 text-amber-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <div key={i} className="flex items-start text-xs text-slate-200">
+                      <Zap className="w-3.5 h-3.5 text-amber-400 mr-2 flex-shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -201,13 +201,13 @@ export const ProductModal: React.FC = () => {
             {/* Technical Specs Table */}
             {selectedProduct.specs && Object.keys(selectedProduct.specs).length > 0 && (
               <div className="space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">Technical Specifications</h4>
-                <div className="rounded-xl border border-slate-200 bg-slate-50 overflow-hidden divide-y divide-slate-200 text-xs">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Technical Specifications</h4>
+                <div className="rounded-xl border border-white/20 glass-panel-subtle overflow-hidden divide-y divide-white/20 text-xs">
                   {Object.entries(selectedProduct.specs).map(([key, val]) => (
                     val ? (
                       <div key={key} className="grid grid-cols-3 px-3 py-2">
-                        <span className="text-slate-500 capitalize font-medium">{key}</span>
-                        <span className="col-span-2 text-slate-800 font-bold">{val}</span>
+                        <span className="text-slate-400 capitalize font-medium">{key}</span>
+                        <span className="col-span-2 text-white font-bold">{val}</span>
                       </div>
                     ) : null
                   ))}
@@ -218,20 +218,20 @@ export const ProductModal: React.FC = () => {
             {/* Quantity Selector & Buttons */}
             <div className="pt-2 space-y-3">
               <div className="flex items-center space-x-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Quantity</span>
-                <div className="flex items-center border border-slate-300 rounded-xl overflow-hidden bg-white">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Quantity</span>
+                <div className="flex items-center border border-white/20 rounded-xl overflow-hidden glass-panel-subtle">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 transition-colors font-bold"
+                    className="px-3.5 py-1.5 text-sm text-slate-300 hover:bg-white/10 transition-colors font-bold"
                   >
                     -
                   </button>
-                  <span className="px-4 py-1.5 text-xs font-black text-slate-900 min-w-[36px] text-center">
+                  <span className="px-4 py-1.5 text-xs font-black text-white min-w-[36px] text-center">
                     {quantity}
                   </span>
                   <button
                     onClick={() => setQuantity(Math.min(selectedProduct.stockCount || 99, quantity + 1))}
-                    className="px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 transition-colors font-bold"
+                    className="px-3.5 py-1.5 text-sm text-slate-300 hover:bg-white/10 transition-colors font-bold"
                   >
                     +
                   </button>
@@ -245,9 +245,9 @@ export const ProductModal: React.FC = () => {
                   className={`py-3.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center space-x-2 transition-all border ${
                     selectedProduct.inStock
                       ? justAdded
-                        ? 'bg-emerald-600 text-white border-emerald-600'
-                        : 'bg-white hover:bg-slate-50 text-slate-800 border-slate-300 shadow-sm'
-                      : 'bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed'
+                        ? 'bg-emerald-600 text-white border-emerald-500'
+                        : 'glass-btn text-white border-white/20'
+                      : 'glass-panel-subtle text-slate-500 border-white/5 cursor-not-allowed'
                   }`}
                 >
                   {justAdded ? (
@@ -257,7 +257,7 @@ export const ProductModal: React.FC = () => {
                     </>
                   ) : (
                     <>
-                      <ShoppingBag className="w-4 h-4 text-amber-600" />
+                      <ShoppingBag className="w-4 h-4 text-amber-400" />
                       <span>Add to Cart</span>
                     </>
                   )}
@@ -266,10 +266,10 @@ export const ProductModal: React.FC = () => {
                 <button
                   onClick={handleBuyNow}
                   disabled={!selectedProduct.inStock}
-                  className={`py-3.5 px-4 rounded-xl text-xs font-extrabold flex items-center justify-center space-x-2 transition-all shadow-md ${
+                  className={`py-3.5 px-4 rounded-xl text-xs font-extrabold flex items-center justify-center space-x-2 transition-all shadow-xl ${
                     selectedProduct.inStock
-                      ? 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white active:scale-98'
-                      : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                      ? 'glass-btn-primary text-white active:scale-95'
+                      : 'glass-panel-subtle text-slate-500 cursor-not-allowed'
                   }`}
                 >
                   <span>Instant Buy Now</span>

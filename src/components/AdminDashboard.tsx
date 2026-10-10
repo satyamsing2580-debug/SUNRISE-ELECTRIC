@@ -453,7 +453,7 @@ export const AdminDashboard: React.FC = () => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 text-slate-800">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 text-slate-100">
       
       {/* Continuous High-Volume Order Alarm Banner */}
       {(isOrderAlarmActive || newOrderAlert) && (
@@ -496,20 +496,20 @@ export const AdminDashboard: React.FC = () => {
       )}
 
       {/* Top Header with Audio Alert Switch */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-slate-200 gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-white/10 gap-4">
         <div>
           <div className="flex items-center space-x-2">
-            <span className="p-2 rounded-xl bg-amber-100 text-amber-700 border border-amber-300">
+            <span className="p-2 rounded-xl glass-panel-subtle text-amber-400 border border-amber-400/30">
               <LayoutDashboard className="w-6 h-6" />
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
               Super Admin Control Center
             </h1>
-            <span className="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
+            <span className="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
               Owner: Ashish Singh • LAKHAPATIYA MORE, GOPALGANJ
             </span>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-slate-400 mt-1">
             Real-time Firestore sync • Continuous High-Attention Audio Alarm • Dynamic Coupons & App Configuration.
           </p>
         </div>
@@ -527,19 +527,19 @@ export const AdminDashboard: React.FC = () => {
             }}
             className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-bold border transition-all ${
               soundAlertEnabled 
-                ? 'bg-amber-50 border-amber-300 text-amber-900 shadow-sm' 
-                : 'bg-slate-100 border-slate-300 text-slate-500'
+                ? 'bg-amber-500/20 border-amber-400/40 text-amber-300 shadow-sm' 
+                : 'glass-panel-subtle border-white/10 text-slate-400'
             }`}
             title="Toggle loud audio alarm on incoming orders"
           >
             {soundAlertEnabled ? (
               <>
-                <Volume2 className="w-4 h-4 text-amber-600 animate-pulse" />
+                <Volume2 className="w-4 h-4 text-amber-400 animate-pulse" />
                 <span>Alarm Sound: ON</span>
               </>
             ) : (
               <>
-                <VolumeX className="w-4 h-4 text-slate-400" />
+                <VolumeX className="w-4 h-4 text-slate-500" />
                 <span>Alarm Sound: MUTED</span>
               </>
             )}
@@ -560,7 +560,7 @@ export const AdminDashboard: React.FC = () => {
                 resetToInitialCatalog();
               }
             }}
-            className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold border border-slate-300 transition-colors flex items-center space-x-1"
+            className="px-3.5 py-2 glass-btn text-slate-300 rounded-xl text-xs font-bold border border-white/15 transition-colors flex items-center space-x-1"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset Demo Store</span>
@@ -568,7 +568,7 @@ export const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* CONTINUOUS LOUD ALARM ALERT BANNER (rings until "I KNOW ORDER" is clicked) */}
+      {/* CONTINUOUS LOUD ALARM ALERT BANNER */}
       {isOrderAlarmActive && (
         <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white shadow-2xl border-4 border-red-300 animate-pulse flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-3.5 text-center sm:text-left">
@@ -599,44 +599,44 @@ export const AdminDashboard: React.FC = () => {
         </div>
       )}
 
-      {/* Metrics Cards */}
+      {/* Metrics Cards in Frosted Glass */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
-          <div className="flex justify-between items-center text-slate-500 text-xs font-bold">
+        <div className="p-5 rounded-2xl glass-panel border border-white/20 shadow-xl space-y-1">
+          <div className="flex justify-between items-center text-slate-400 text-xs font-bold">
             <span>Total Sales Volume</span>
-            <DollarSign className="w-4 h-4 text-emerald-600" />
+            <DollarSign className="w-4 h-4 text-emerald-400" />
           </div>
-          <p className="text-2xl font-black text-slate-900">
+          <p className="text-2xl font-black text-white">
             ₹{totalRevenue.toLocaleString('en-IN')}
           </p>
-          <p className="text-[11px] text-emerald-600 font-bold">Live across {orders.length} orders</p>
+          <p className="text-[11px] text-emerald-400 font-bold">Live across {orders.length} orders</p>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
-          <div className="flex justify-between items-center text-slate-500 text-xs font-bold">
+        <div className="p-5 rounded-2xl glass-panel border border-white/20 shadow-xl space-y-1">
+          <div className="flex justify-between items-center text-slate-400 text-xs font-bold">
             <span>Incoming / Pending Orders</span>
-            <ShoppingBag className="w-4 h-4 text-amber-600" />
+            <ShoppingBag className="w-4 h-4 text-amber-400" />
           </div>
-          <p className="text-2xl font-black text-amber-600">{pendingOrders}</p>
-          <p className="text-[11px] text-slate-500">Awaiting dispatch or verification</p>
+          <p className="text-2xl font-black text-amber-400">{pendingOrders}</p>
+          <p className="text-[11px] text-slate-400">Awaiting dispatch or verification</p>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
-          <div className="flex justify-between items-center text-slate-500 text-xs font-bold">
+        <div className="p-5 rounded-2xl glass-panel border border-white/20 shadow-xl space-y-1">
+          <div className="flex justify-between items-center text-slate-400 text-xs font-bold">
             <span>Catalog Components</span>
-            <Package className="w-4 h-4 text-sky-600" />
+            <Package className="w-4 h-4 text-sky-400" />
           </div>
-          <p className="text-2xl font-black text-slate-900">{products.length}</p>
-          <p className="text-[11px] text-slate-500">In {categories.length} store categories</p>
+          <p className="text-2xl font-black text-white">{products.length}</p>
+          <p className="text-[11px] text-slate-400">In {categories.length} store categories</p>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
-          <div className="flex justify-between items-center text-slate-500 text-xs font-bold">
+        <div className="p-5 rounded-2xl glass-panel border border-white/20 shadow-xl space-y-1">
+          <div className="flex justify-between items-center text-slate-400 text-xs font-bold">
             <span>Low Inventory Alert</span>
-            <AlertTriangle className="w-4 h-4 text-rose-600" />
+            <AlertTriangle className="w-4 h-4 text-rose-400" />
           </div>
-          <p className="text-2xl font-black text-rose-600">{lowStockCount}</p>
-          <p className="text-[11px] text-slate-500">Items with &lt; 20 units in stock</p>
+          <p className="text-2xl font-black text-rose-400">{lowStockCount}</p>
+          <p className="text-[11px] text-slate-400">Items with &lt; 20 units in stock</p>
         </div>
       </div>
 

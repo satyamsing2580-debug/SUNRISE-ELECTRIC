@@ -87,6 +87,8 @@ interface StoreContextType {
   discountAmount: number;
   couponCode: string;
   appliedCoupon: string | null;
+  coupon: Coupon | null;
+  appliedCouponObj: Coupon | null;
   total: number;
   addToCart: (product: Product, quantity?: number, selectedColor?: string) => void;
   removeFromCart: (productId: string) => void;
@@ -552,21 +554,24 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return subtotal > threshold ? 0 : (appSettings.deliveryFee ?? 99);
   }, [subtotal, appSettings.freeDeliveryThreshold, appSettings.deliveryFee]);
 
-  const discountAmount = useMemo(() => {
-    if (!appliedCoupon) return 0;
-    const matched = coupons.find(
+  const appliedCouponObj = useMemo(() => {
+    if (!appliedCoupon) return null;
+    return coupons.find(
       (c) => c.code.toUpperCase() === appliedCoupon.toUpperCase() && c.isActive
-    );
-    if (!matched) return 0;
-    if (subtotal < matched.minOrderValue) return 0;
+    ) || null;
+  }, [appliedCoupon, coupons]);
 
-    if (matched.discountType === 'percentage') {
-      const calc = Math.round((subtotal * matched.discountValue) / 100);
-      return matched.maxDiscount ? Math.min(matched.maxDiscount, calc) : calc;
+  const discountAmount = useMemo(() => {
+    if (!appliedCouponObj) return 0;
+    if (subtotal < appliedCouponObj.minOrderValue) return 0;
+
+    if (appliedCouponObj.discountType === 'percentage') {
+      const calc = Math.round((subtotal * appliedCouponObj.discountValue) / 100);
+      return appliedCouponObj.maxDiscount ? Math.min(appliedCouponObj.maxDiscount, calc) : calc;
     } else {
-      return Math.min(matched.discountValue, subtotal);
+      return Math.min(appliedCouponObj.discountValue, subtotal);
     }
-  }, [appliedCoupon, coupons, subtotal]);
+  }, [appliedCouponObj, subtotal]);
 
   const total = useMemo(() => {
     return Math.max(0, subtotal + taxGst + shippingFee - discountAmount);
@@ -944,6 +949,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         discountAmount,
         couponCode: appliedCoupon || '',
         appliedCoupon,
+        coupon: appliedCouponObj,
+        appliedCouponObj,
         total,
         addToCart,
         removeFromCart,
