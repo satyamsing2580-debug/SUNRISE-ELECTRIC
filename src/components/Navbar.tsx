@@ -41,6 +41,7 @@ export const Navbar: React.FC = () => {
   const handleNavClick = (view: 'home' | 'catalog' | 'orders' | 'admin' | 'wishlist') => {
     setCurrentView(view);
     setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   return (

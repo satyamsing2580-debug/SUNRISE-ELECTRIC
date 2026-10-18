@@ -7,7 +7,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     slug: 'switches-modular',
     description: 'Luxury glass, metal & antibacterial modular plates and smart tactile switches.',
     iconName: 'ToggleRight',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/modular_switch_1792312898312.jpg',
     badge: 'Trending'
   },
   {
@@ -16,7 +16,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     slug: 'wires-cables',
     description: '100% pure electrolytic copper, flame-retardant and zero halogen insulated wires.',
     iconName: 'Cable',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/copper_wires_1792312920664.jpg',
     badge: 'ISI Certified'
   },
   {
@@ -25,7 +25,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     slug: 'luxury-lighting',
     description: 'Magnetic track lights, recessed COB downlights, chandeliers & designer LED strips.',
     iconName: 'Lightbulb',
-    image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/track_light_1792312970290.jpg',
     badge: 'Popular'
   },
   {
@@ -34,7 +34,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     slug: 'fans-ventilation',
     description: 'Super energy-efficient BLDC motors, whisper quiet acoustics, aerodynamic wooden blades.',
     iconName: 'Fan',
-    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/bldc_fan_1792312935371.jpg',
     badge: 'Save 65% Power'
   },
   {
@@ -43,7 +43,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     slug: 'smart-automation',
     description: 'WiFi & Zigbee retro-fit relays, voice-controlled scene dimmers, and energy meters.',
     iconName: 'Cpu',
-    image: 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/smart_relay_1792313018230.jpg',
     badge: 'Alexa & Google'
   },
   {
@@ -52,7 +52,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     slug: 'switchgear-safety',
     description: 'Double pole MCBs, sensitive RCCBs, surge protection devices & industrial enclosures.',
     iconName: 'ShieldAlert',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/mcb_breaker_1792312955593.jpg',
     badge: 'Industrial Grade'
   }
 ];
@@ -73,10 +73,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     stockCount: 45,
     isFeatured: true,
     isBestSeller: true,
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/modular_switch_1792312898312.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
+      '/src/assets/images/modular_switch_1792312898312.jpg',
+      '/src/assets/images/gold_switch_1792313002563.jpg'
     ],
     description: 'Exquisite French architectural craftsmanship. The Legrand Arteor tempered mirror black glass finish elevates luxury interior walls with an ultra-thin bevel and anti-static surface.',
     features: [
@@ -108,7 +108,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     inStock: true,
     stockCount: 68,
     isFeatured: true,
-    image: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/gold_switch_1792313002563.jpg',
     description: 'Precision engineered by Havells Crabtree. Crafted with brushed champagne gold finish and a subtle warm sapphire LED locator for seamless nighttime navigation.',
     features: [
       'Silver cadmium oxide contacts for ultra-low arc resistance',
@@ -139,7 +139,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     stockCount: 120,
     isFeatured: true,
     isBestSeller: true,
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/copper_wires_1792312920664.jpg',
     description: 'India’s most trusted electrical wiring cable. 99.97% pure oxygen-free high-conductivity electrolytic copper with multi-layer FR-LSH (Flame Retardant Low Smoke Zero Halogen) insulation.',
     features: [
       '99.97% Bare electrolytic grade bright annealed copper conductor',
@@ -168,7 +168,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 220,
     inStock: true,
     stockCount: 85,
-    image: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/yellow_wire_1792313092914.jpg',
     description: 'Engineered with Heat Resistant & Flame Retardant 105°C thermal threshold insulation. Prevents voltage drop and keeps living spaces 100% electrically secure.',
     features: [
       'Rated 105°C operating thermal endurance',
@@ -198,10 +198,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     stockCount: 30,
     isFeatured: true,
     isNewArrival: true,
-    image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/track_light_1792312970290.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=800&q=80'
+      '/src/assets/images/track_light_1792312970290.jpg',
+      '/src/assets/images/crystal_chandelier_1792312987385.jpg'
     ],
     description: 'Ultra-modern 48V low voltage magnetic snap-in LED architectural linear light. Offers anti-glare UGR < 13 optics with smooth warm-to-cool CCT tuning.',
     features: [
@@ -232,7 +232,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     inStock: true,
     stockCount: 12,
     isFeatured: true,
-    image: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/crystal_chandelier_1792312987385.jpg',
     description: 'Hand-cut genuine K9 sparkling crystal prisms suspended on a brushed brass gold ring. 3-step color temperature switching via RF remote control.',
     features: [
       'Hand-polished optical K9 crystals with high refractive index',
@@ -263,7 +263,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     stockCount: 55,
     isFeatured: true,
     isBestSeller: true,
-    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/bldc_fan_1792312935371.jpg',
     description: 'Consumes only 28W at top speed, slashing fan electricity bills by up to 65%. Equipped with smart WiFi, sleep timer modes, boost mode, and remote control.',
     features: [
       'Super efficient BLDC Motor consumes 28W (saves ₹1500/year)',
@@ -292,7 +292,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 89,
     inStock: true,
     stockCount: 28,
-    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/wood_fan_1792313068993.jpg',
     description: 'Designed for library-quiet operation at only 52dB. Fluidic aerodynamic fluid-sculpted blades deliver 240 CMM air delivery with fluid elegance.',
     features: [
       'SilentPro aerodynamic fluid dynamic blade design',
@@ -323,7 +323,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     stockCount: 42,
     isFeatured: true,
     isNewArrival: true,
-    image: 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/smart_relay_1792313018230.jpg',
     description: 'Retrofit smart module that fits neatly behind your existing switchboard without changing wall plates. Control 4 lights/fans with phone, timer, and voice.',
     features: [
       'Fits standard 2M to 8M wall conceal boxes behind existing plates',
@@ -354,7 +354,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     stockCount: 150,
     isFeatured: true,
     isBestSeller: true,
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/mcb_breaker_1792312955593.jpg',
     description: 'Gold standard in commercial and residential electrical circuit protection. 10kA breaking capacity with VisiTrip indicator that instantly flags fault trips.',
     features: [
       'VisiTrip indicator: red flag immediately isolates the faulty line',
@@ -383,7 +383,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 92,
     inStock: true,
     stockCount: 60,
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/rccb_breaker_1792313036844.jpg',
     description: 'Life-saving human shock protection. Detects micro-leakage currents greater than 30mA and trips within milliseconds to prevent fatal electric shocks and electrical fires.',
     features: [
       'High-sensitivity 30mA trip threshold for human life safety',
@@ -411,7 +411,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 165,
     inStock: true,
     stockCount: 74,
-    image: 'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?auto=format&fit=crop&w=800&q=80',
+    image: '/src/assets/images/cob_downlight_1792313054714.jpg',
     description: 'Connect directly to your home 2.4GHz WiFi without any extra bridge. Control circadian rhythm lighting that shifts from invigorating morning cool white to relaxing warm amber at sunset.',
     features: [
       '16 Million RGB colors + 2200K to 6500K tunable whites',

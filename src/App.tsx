@@ -38,6 +38,10 @@ const MainContent: React.FC = () => {
     setFilter 
   } = useStore();
 
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [currentView]);
+
   const featuredProducts = React.useMemo(() => {
     const map = new Map<string, Product>();
     for (const p of products) {
@@ -176,7 +180,7 @@ const MainContent: React.FC = () => {
                     <div className="lg:col-span-4 flex justify-center">
                       <div className="relative rounded-2xl overflow-hidden aspect-square w-64 glass-panel border border-white/20 shadow-2xl group">
                         <img
-                          src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"
+                          src="/src/assets/images/bldc_fan_1792312935371.jpg"
                           alt="BLDC Smart Fan"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         />
@@ -224,64 +228,58 @@ const MainContent: React.FC = () => {
                 </div>
               </section>
 
-              {/* Testimonials from Contractors & Homeowners in Frosted Glass */}
+              {/* Authentic Electrical Showroom Credentials & Standards (No Fake Reviews) */}
               <section className="relative py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="text-center max-w-xl mx-auto mb-12 space-y-2">
                     <span className="text-xs font-black uppercase tracking-wider text-amber-400">
-                      Authentic Electrical Showroom • Gopalganj
+                      Authorized Wholesale & Retail Showroom • Gopalganj, Bihar
                     </span>
                     <h2 className="text-2xl sm:text-4xl font-black text-white font-display">
-                      What Contractors & Builders Say
+                      Electrical Trade & Safety Standards
                     </h2>
                     <p className="text-xs text-slate-300">
-                      From luxury residences to commercial high-rises.
+                      Supplying certified electrical infrastructure for residential, commercial & government projects.
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-6 rounded-2xl glass-card space-y-4">
-                      <div className="flex items-center space-x-1 text-amber-400">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-amber-400" />
-                        ))}
+                    <div className="p-6 rounded-2xl glass-card space-y-3 border border-white/20">
+                      <div className="w-12 h-12 rounded-xl glass-panel-subtle border border-amber-400/30 flex items-center justify-center text-amber-400">
+                        <ShieldCheck className="w-6 h-6" />
                       </div>
-                      <p className="text-xs text-slate-200 italic leading-relaxed">
-                        "Sunrise Electricals supplied authentic Legrand Arteor plates and Polycab FR wires for our 4-villa project. All coils came with batch test reports and GST billing. Prompt next-day delivery."
+                      <h3 className="text-base font-bold text-white">100% Genuine ISI & BIS Certified</h3>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        Every wire coil, circuit breaker, and modular plate is sourced directly from certified manufacturers with verified laboratory test certificates. No grey market or counterfeit items.
                       </p>
-                      <div className="pt-3 border-t border-white/20">
-                        <p className="font-bold text-white text-xs">Ar. Vikram Mehra</p>
-                        <p className="text-[10px] text-slate-400">Principal Architect, Mehra Design Studio</p>
+                      <div className="pt-2 text-[11px] font-bold text-amber-300">
+                        Polycab • Havells • Legrand • Schneider
                       </div>
                     </div>
 
-                    <div className="p-6 rounded-2xl glass-card space-y-4">
-                      <div className="flex items-center space-x-1 text-amber-400">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-amber-400" />
-                        ))}
+                    <div className="p-6 rounded-2xl glass-card space-y-3 border border-white/20">
+                      <div className="w-12 h-12 rounded-xl glass-panel-subtle border border-emerald-400/30 flex items-center justify-center text-emerald-400">
+                        <Zap className="w-6 h-6" />
                       </div>
-                      <p className="text-xs text-slate-200 italic leading-relaxed">
-                        "Their real-time order tracking and warehouse stock accuracy is unmatched in the electrical sector. Never had a counterfeit switch or broken crystal fixture."
+                      <h3 className="text-base font-bold text-white">GST Invoicing & Contractor Billing</h3>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        Instant GST compliant invoices with itemized HSN codes for seamless input tax credit (ITC) on all builder, architect, and commercial electrical contract purchases.
                       </p>
-                      <div className="pt-3 border-t border-white/20">
-                        <p className="font-bold text-white text-xs">Rajeev K. Sharma</p>
-                        <p className="text-[10px] text-slate-400">Senior Electrical Contractor, Sector 150</p>
+                      <div className="pt-2 text-[11px] font-bold text-emerald-400">
+                        Full GST Input Credit Supported
                       </div>
                     </div>
 
-                    <div className="p-6 rounded-2xl glass-card space-y-4">
-                      <div className="flex items-center space-x-1 text-amber-400">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-amber-400" />
-                        ))}
+                    <div className="p-6 rounded-2xl glass-card space-y-3 border border-white/20">
+                      <div className="w-12 h-12 rounded-xl glass-panel-subtle border border-sky-400/30 flex items-center justify-center text-sky-400">
+                        <CheckCircle2 className="w-6 h-6" />
                       </div>
-                      <p className="text-xs text-slate-200 italic leading-relaxed">
-                        "The magnetic track lighting system by Philips is phenomenal. Sunrise's engineering team helped calculate the lumen requirements and driver wattage accurately."
+                      <h3 className="text-base font-bold text-white">Showroom & On-Site Replacement</h3>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        Physical authorized store located at Lakhapatiya More, Gopalganj. Instant exchange for manufacturing defects and direct brand warranty registration assistance.
                       </p>
-                      <div className="pt-3 border-t border-white/20">
-                        <p className="font-bold text-white text-xs">Pooja Singhania</p>
-                        <p className="text-[10px] text-slate-400">Interior Stylist & Homeowner</p>
+                      <div className="pt-2 text-[11px] font-bold text-sky-300">
+                        Proprietor: Ashish Singh • +91 7488623614
                       </div>
                     </div>
                   </div>

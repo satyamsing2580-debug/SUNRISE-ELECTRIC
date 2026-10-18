@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Filter, 
   X, 
@@ -23,6 +23,10 @@ export const ProductCatalog: React.FC = () => {
   } = useStore();
 
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [filters.category]);
 
   const handleBrandToggle = (brand: string) => {
     if (brand === 'All Brands') {

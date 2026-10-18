@@ -113,10 +113,14 @@ export const AdminDashboard: React.FC = () => {
 
   // Preset Genuine Electrical Products Imagery for quick testing
   const PRESET_ELECTRICAL_PHOTOS = [
-    { label: 'Havells Switch', url: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80' },
-    { label: 'Copper Wire', url: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80' },
-    { label: 'LED Track Light', url: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80' },
-    { label: 'BLDC Fan', url: 'https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=800&q=80' }
+    { label: 'Modular Switch Plate', url: '/src/assets/images/modular_switch_1792312898312.jpg' },
+    { label: 'Gold Touch Switch', url: '/src/assets/images/gold_switch_1792313002563.jpg' },
+    { label: 'Copper Wire 90m', url: '/src/assets/images/copper_wires_1792312920664.jpg' },
+    { label: 'Yellow Wire 1.5mm', url: '/src/assets/images/yellow_wire_1792313092914.jpg' },
+    { label: 'LED Track Light', url: '/src/assets/images/track_light_1792312970290.jpg' },
+    { label: 'BLDC Fan', url: '/src/assets/images/bldc_fan_1792312935371.jpg' },
+    { label: 'MCB Breaker', url: '/src/assets/images/mcb_breaker_1792312955593.jpg' },
+    { label: 'Smart WiFi Relay', url: '/src/assets/images/smart_relay_1792313018230.jpg' }
   ];
 
   // Product form fields
@@ -126,7 +130,7 @@ export const AdminDashboard: React.FC = () => {
   const [pPrice, setPPrice] = useState(1500);
   const [pOriginalPrice, setPOriginalPrice] = useState(1800);
   const [pStock, setPStock] = useState(50);
-  const [pImage, setPImage] = useState('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80');
+  const [pImage, setPImage] = useState('/src/assets/images/modular_switch_1792312898312.jpg');
   const [pDescription, setPDescription] = useState('');
   const [pVoltage, setPVoltage] = useState('220V - 250V AC');
   const [pWarranty, setPWarranty] = useState('5 Years Warranty');
@@ -136,7 +140,7 @@ export const AdminDashboard: React.FC = () => {
   const [editingCategoryId, setEditingCategoryId] = useState<string | null>(null);
   const [catName, setCatName] = useState('');
   const [catDescription, setCatDescription] = useState('');
-  const [catImage, setCatImage] = useState('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80');
+  const [catImage, setCatImage] = useState('/src/assets/images/modular_switch_1792312898312.jpg');
   const [catBadge, setCatBadge] = useState('New');
 
   // Inline Quick Edits
@@ -323,10 +327,10 @@ export const AdminDashboard: React.FC = () => {
 
     if (editingProductId) {
       await updateProduct(editingProductId, payload);
-      alert('Product updated successfully in Firestore!');
+      alert('Product updated successfully!');
     } else {
       await addProduct(payload);
-      alert('New product saved to Firestore catalog!');
+      alert('New product saved to catalog!');
     }
 
     setIsProductModalOpen(false);
@@ -474,7 +478,7 @@ export const AdminDashboard: React.FC = () => {
               <p className="text-xs font-bold text-red-100 mt-0.5">
                 {newOrderAlert 
                   ? `Customer: ${newOrderAlert.customerName} • Total: ₹${newOrderAlert.totalAmount?.toLocaleString('en-IN')} (${newOrderAlert.items?.length || 0} items)`
-                  : 'New customer order registered in Firestore. Click below to acknowledge.'}
+                  : 'New customer order registered. Click below to acknowledge.'}
               </p>
             </div>
           </div>
@@ -510,7 +514,7 @@ export const AdminDashboard: React.FC = () => {
             </span>
           </div>
           <p className="text-xs text-slate-400 mt-1">
-            Real-time Firestore sync • Continuous High-Attention Audio Alarm • Dynamic Coupons & App Configuration.
+            Live Store Management • Order Dispatch Pipeline • Dynamic Coupons & Inventory Controls.
           </p>
         </div>
 
@@ -556,7 +560,7 @@ export const AdminDashboard: React.FC = () => {
 
           <button
             onClick={() => {
-              if (window.confirm('Reset catalog to 12 curated electrical products in Firestore?')) {
+              if (window.confirm('Reset catalog to 12 curated electrical products?')) {
                 resetToInitialCatalog();
               }
             }}
@@ -585,7 +589,7 @@ export const AdminDashboard: React.FC = () => {
               <p className="text-xs text-red-100">
                 {newOrderAlert 
                   ? `Order ${newOrderAlert.orderNumber} • ${newOrderAlert.customerName} • ₹${newOrderAlert.totalAmount?.toLocaleString('en-IN')}`
-                  : 'A customer has just placed a new order in Firestore!'}
+                  : 'A customer has just placed a new order!'}
               </p>
             </div>
           </div>

@@ -17,6 +17,7 @@ export const HeroBanner: React.FC = () => {
   const handleCategoryClick = (categoryName: string) => {
     setFilter('category', categoryName);
     setCurrentView('catalog');
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   return (
@@ -122,7 +123,7 @@ export const HeroBanner: React.FC = () => {
                   }}
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=900&q=80"
+                    src="/src/assets/images/modular_switch_1792312898312.jpg"
                     alt="Luxury Modular Switches"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
